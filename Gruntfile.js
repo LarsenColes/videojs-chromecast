@@ -177,7 +177,12 @@ module.exports = function(grunt) {
    grunt.registerTask('build-js', [ 'browserify', 'uglify' ]);
    grunt.registerTask('build-css', [ 'sass', 'postcss:styles' ]);
    grunt.registerTask('build', [ 'build-js', 'build-css', 'copy:images' ]);
-   grunt.registerTask('develop', [ 'build', 'watch' ]);
+   grunt.registerTask('develop', function() {
+      // Set debug flag globally
+      grunt.option('debug', true);
+      // Run the tasks
+      grunt.task.run([ 'build', 'watch' ]);
+   });
    grunt.registerTask('default', [ 'build' ]);
 
 };
